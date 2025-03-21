@@ -32,7 +32,10 @@ exports.signup = async (req, res) => {
     await newUser.save();
 
     const token = generateToken(newUser, "user");
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      secure: true, // Ensure HTTPS in production
+      sameSite: "None",
+    });
 
     res.json({ message: " SignIn successfully" });
   } catch (error) {
@@ -61,8 +64,10 @@ exports.login = async (req, res) => {
       return res.status(400).json({ message: "invalid credentials" });
     }
     const token = generateToken(userExist, "user");
-    res.cookie("token", token);
-
+    res.cookie("token", token, {
+      secure: true, // Ensure HTTPS in production
+      sameSite: "None",
+    });
     res.json({ message: " Login succssfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
