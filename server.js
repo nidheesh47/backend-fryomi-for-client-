@@ -25,7 +25,7 @@ app.use(cookieParser());
 // CORS configuration
 app.use(
   cors({
-    origin: [process.env.CLIENT_URL, process.env.ADMIN_URL], // Allow requests from these origins
+    origin: process.env.CLIENT_URL, // Allow requests from these origins
     credentials: true, // Allow cookies and credentials
   })
 );
